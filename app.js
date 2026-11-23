@@ -79,7 +79,6 @@ function renderTables(deductionPlayers, gamePlayers) {
 
     activateDeductionCells();
     activateCounterCells();
-    activateExclusionsRegister();
 }
 
 // Costruisce la tabella Deduzioni
@@ -146,92 +145,33 @@ function buildQuestionsTable(players) {
 
 // Costruisce la tabella Esclusioni
 function buildExclusionsTable(players) {
-    let html = '<div class="tableBlock exclusionsBlock">';
-    html += '<h2>Esclusioni</h2>';
-    html += '<p class="registerHelp">Registra chi ha mostrato una delle tre carte chiamate.</p>';
-    html += '<form id="exclusionsForm" class="exclusionsForm">';
-    html += '<label>Chi ha mostrato<select name="player" required>';
-    html += '<option value="">Scegli il giocatore</option>';
-    players.forEach(function(player, index) {
-        html += '<option value="' + index + '">' + escapeHtml(player) + '</option>';
-    });
-    html += '</select></label>';
+    let html = "";
 
-    const fieldNames = ["suspect", "weapon", "room"];
-    let sectionIndex = -1;
+    html += '<div class="tableBlock">';
+    html += "<h2>Esclusioni</h2>";
+    html += '<table id="exclusionsTable">';
+
+    html += buildHeaderRow(players);
+
     for(let card of cards) {
         if(card.type === "section") {
-            if(sectionIndex >= 0) html += '</select></label>';
-            sectionIndex++;
-            html += '<label>' + card.name + '<select name="' + fieldNames[sectionIndex] + '" required>';
-            html += '<option value="">Scegli la carta</option>';
+            html += buildSectionRow(card.name, players);
         } else {
-            html += '<option>' + escapeHtml(card.name) + '</option>';
+            html += "<tr>";
+            html += '<td class="cardName">' + card.name + "</td>";
+
+            for(let player of players) {
+                html += '<td class="editableCell" contenteditable="true"></td>';
+            }
+
+            html += "</tr>";
         }
     }
-    html += '</select></label>';
-    html += '<button type="submit">Registra chiamata</button></form>';
-    html += '<p id="exclusionsEmpty" class="registerHelp">Nessuna chiamata registrata.</p>';
-    html += '<p id="exclusionsStatus" class="registerStatus" role="status"></p>';
-    html += '<table id="exclusionsTable" hidden><thead><tr>';
-    html += '<th scope="col">N.</th><th scope="col">Chi ha mostrato</th>';
-    html += '<th scope="col">Possibili carte</th><th scope="col">Azioni</th>';
-    html += '</tr></thead><tbody></tbody></table></div>';
+
+    html += "</table>";
+    html += "</div>";
+
     return html;
-}
-
-function escapeHtml(value) {
-    return String(value).replace(/[&<>"']/g, function(character) {
-        return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[character];
-    });
-}
-
-// Ogni riga conserva le tre alternative della stessa risposta.
-function activateExclusionsRegister() {
-    const form = document.getElementById("exclusionsForm");
-    const table = document.getElementById("exclusionsTable");
-    const body = table.querySelector("tbody");
-    const empty = document.getElementById("exclusionsEmpty");
-    const status = document.getElementById("exclusionsStatus");
-    let nextNumber = 1;
-
-    form.addEventListener("submit", function(event) {
-        event.preventDefault();
-        if(!form.reportValidity()) return;
-
-        const player = form.elements.namedItem("player");
-        const number = nextNumber++;
-        const row = document.createElement("tr");
-        const numberCell = document.createElement("td");
-        numberCell.textContent = number;
-        const playerCell = document.createElement("td");
-        playerCell.textContent = player.options[player.selectedIndex].textContent;
-        const cardsCell = document.createElement("td");
-        cardsCell.className = "possibleCards";
-        for(const field of ["suspect", "weapon", "room"]) {
-            const card = document.createElement("span");
-            card.textContent = form.elements.namedItem(field).value;
-            cardsCell.appendChild(card);
-        }
-        const actionsCell = document.createElement("td");
-        const remove = document.createElement("button");
-        remove.type = "button";
-        remove.className = "removeCall";
-        remove.textContent = "Elimina";
-        remove.setAttribute("aria-label", "Elimina chiamata " + number);
-        remove.addEventListener("click", function() {
-            row.remove();
-            table.hidden = body.rows.length === 0;
-            empty.hidden = body.rows.length !== 0;
-            status.textContent = "Chiamata " + number + " eliminata.";
-        });
-        actionsCell.appendChild(remove);
-        row.append(numberCell, playerCell, cardsCell, actionsCell);
-        body.prepend(row);
-        table.hidden = false;
-        empty.hidden = true;
-        status.textContent = "Chiamata " + number + " registrata.";
-    });
 }
 
 // Costruisce la riga intestazione
@@ -242,7 +182,7 @@ function buildHeaderRow(players) {
     html += "<th>Carta</th>";
 
     for(let player of players) {
-        html += "<th>" + escapeHtml(player) + "</th>";
+        html += "<th>" + player + "</th>";
     }
 
     html += "</tr>";

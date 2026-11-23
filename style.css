@@ -90,7 +90,7 @@ th {
 
 /* Evidenziazione durante modifica */
 .cardName:focus,
-.exclusionsForm select:focus-visible {
+.editableCell:focus {
     outline: 3px solid orange;
     background-color: #fff7d6;
 }
@@ -125,6 +125,16 @@ th {
     outline: 3px solid orange;
 }
 
+/* Celle editabili della tabella Esclusioni */
+.editableCell {
+    width: 32px;
+    height: 28px;
+    background-color: white;
+    color: #003b8f;
+    cursor: text;
+    padding: 0;
+}
+
 /* Titoli sezione: CHI, CHE COSA, DOVE */
 .sectionTitle {
     background-color: #003b8f;
@@ -146,90 +156,11 @@ th {
 }
 
 /* Colonne giocatori con larghezza uniforme */
-.tableBlock:not(.exclusionsBlock) th:not(:first-child),
+th:not(:first-child),
 .gameCell,
-.counterCell {
+.counterCell,
+.editableCell {
     width: var(--player-column-width);
     min-width: var(--player-column-width);
     max-width: var(--player-column-width);
-}
-
-/* Registro delle carte mostrate */
-.exclusionsBlock {
-    width: 350px;
-    flex-shrink: 0;
-}
-
-.registerHelp {
-    margin: 0 0 16px;
-    font-size: 14px;
-    line-height: 1.5;
-}
-
-.exclusionsForm {
-    display: grid;
-    gap: 12px;
-    padding: 16px;
-    border: 2px solid #003b8f;
-    border-radius: 4px;
-    margin-bottom: 16px;
-    background: #f4f7fc;
-}
-
-.exclusionsForm label {
-    display: grid;
-    gap: 6px;
-    font-size: 14px;
-    font-weight: bold;
-}
-
-.exclusionsForm select {
-    box-sizing: border-box;
-    width: 100%;
-    min-width: 0;
-    min-height: 44px;
-    padding: 8px;
-    border: 1px solid #003b8f;
-    border-radius: 4px;
-    background: white;
-    color: #003b8f;
-    font: inherit;
-}
-
-#exclusionsTable {
-    width: 100%;
-    font-size: 13px;
-}
-
-#exclusionsTable th {
-    font-size: 11px;
-    overflow-wrap: anywhere;
-}
-
-#exclusionsTable td {
-    overflow-wrap: anywhere;
-}
-
-.possibleCards {
-    text-align: left;
-}
-
-.possibleCards span {
-    display: block;
-    padding: 5px 0;
-}
-
-.removeCall {
-    min-height: 44px;
-    padding: 8px;
-    font-size: 12px;
-}
-
-.registerStatus {
-    margin: 0 0 12px;
-    font-size: 14px;
-}
-
-.registerStatus:empty {
-    display: none;
 }

@@ -2,7 +2,7 @@
 
 Web app in italiano per annotare domande, indizi e deduzioni durante una partita a Cluedo, al posto del classico foglietto di carta. Include 6 personaggi, 6 armi e 9 stanze.
 
-**[Apri l'app](https://luca-gh.github.io/cluedo-assistant/)**
+**[Apri l'app](https://luca-gh.github.io/cluedo-assistant-2016/)**
 
 ## Iniziare una partita
 
@@ -45,8 +45,8 @@ La partita rimane soltanto nella pagina aperta: al momento non è salvata né si
 Non servono installazioni, dipendenze o compilazione:
 
 ```sh
-git clone https://github.com/luca-gh/cluedo-assistant.git
-cd cluedo-assistant
+git clone https://github.com/luca-gh/cluedo-assistant-2016.git
+cd cluedo-assistant-2016
 ```
 
 Apri `index.html` nel browser.

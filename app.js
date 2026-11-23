@@ -69,9 +69,9 @@ function renderTables(deductionPlayers, gamePlayers) {
 
     html += '<div class="tablesContainer">';
 
-    html += buildDeductionTable(deductionPlayers);
     html += buildQuestionsTable(gamePlayers);
     html += buildExclusionsTable(gamePlayers);
+    html += buildDeductionTable(deductionPlayers);
 
     html += "</div>";
 

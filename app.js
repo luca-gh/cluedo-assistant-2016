@@ -112,12 +112,12 @@ function buildDeductionTable(players) {
     return html;
 }
 
-// Costruisce la tabella Domande fatte
+// Costruisce la tabella Domande poste
 function buildQuestionsTable(players) {
     let html = "";
 
     html += '<div class="tableBlock">';
-    html += "<h2>Domande fatte</h2>";
+    html += "<h2>Domande poste</h2>";
     html += '<table id="questionsTable">';
 
     html += buildHeaderRow(players);
@@ -143,12 +143,12 @@ function buildQuestionsTable(players) {
     return html;
 }
 
-// Costruisce la tabella Esclusioni
+// Costruisce la tabella Indizi forniti
 function buildExclusionsTable(players) {
     let html = "";
 
     html += '<div class="tableBlock">';
-    html += "<h2>Esclusioni</h2>";
+    html += "<h2>Indizi forniti</h2>";
     html += '<table id="exclusionsTable">';
 
     html += buildHeaderRow(players);
@@ -233,7 +233,7 @@ function activateDeductionCells() {
     }
 }
 
-// Attiva le celle contatore della tabella Domande fatte
+// Attiva le celle contatore della tabella Domande poste
 function activateCounterCells() {
     const counterCells = document.querySelectorAll(".counterCell");
 

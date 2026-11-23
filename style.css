@@ -109,7 +109,7 @@ th {
     outline: 3px solid #003b8f;
 }
 
-/* Celle contatore della tabella Domande fatte */
+/* Celle contatore della tabella Domande poste */
 .counterCell {
     width: 32px;
     height: 28px;
@@ -125,7 +125,7 @@ th {
     outline: 3px solid orange;
 }
 
-/* Celle editabili della tabella Esclusioni */
+/* Celle editabili della tabella Indizi forniti */
 .editableCell {
     width: 32px;
     height: 28px;
